@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #A8B8A5;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: whitesmoke;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    min-height: 50vh;
+    width: 60vh;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+    color: #344054;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+form {
+    margin: 2rem 0 1rem 0;
+}
+
+form select, button, input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 0.75rem;
+}
+
+.amount p {
+    color: #344054;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+form input {
+    border: 2px solid #D8D2C8;
+    font-size: 1.2rem;
+    height: 3.5rem;
+    padding-left: 1rem;
+    border-radius: 0.75rem;
+}
+
+form input:focus {
+    border-color: #875F45;
+}
+
+.dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.from, .to {
+    flex: 1;
+}
+
+.from p, .to p {
+    color: #344054;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.select-container {
+    display: flex;
+    align-items: center;
+    border-radius: 0.75rem;
+    border: 2px solid #D8D2C8;
+    padding: 0.3rem 0.8rem;
+    background: white;
+    gap: 0.5rem;
+}
+
+.select-container img {
+    max-width: 2.5rem;
+}
+
+.select-container select {
+    font-size: 1.1rem;
+    width: auto;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.3rem 0;
+}
+
+.dropdown i {
+    font-size: 2rem;
+    color: #875F45;
+    margin-top: 1.2rem;
+    cursor: pointer;
+    padding: 0.3rem;
+}
+
+.msg {
+    margin: 2rem 0;
+    padding: 1.2rem;
+    background: #eef0ed;
+    border-radius: 0.75rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #344054;
+    border-left: 5px solid #875F45;
+}
+
+form button {
+    height: 3.5rem;
+    background-color: #344054;
+    color: whitesmoke;
+    font-size: 1.3rem;
+    cursor: pointer;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    transition: background 0.2s;
+}
+
+form button:hover {
+    background-color: #2a3444;
+}
+
+form button:active {
+    transform: scale(0.97);
+}
