@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>Home - Blogify</title>
+</head>
+<body>
+    <%- include("partials/nav") %>
+
+    <main class="container page-shell">
+        <section class="row align-items-end g-4 mb-4">
+            <div class="col-lg-8">
+                <p class="author-chip mb-3"><i class="bi bi-stars"></i> Minimal stories, clearly written</p>
+                <h1 class="page-title mb-3">Read, write, and keep your posts in your hands.</h1>
+                <p class="lead muted-copy mb-0">A simple blogging space for drafts, ideas, and finished notes.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <% if (locals.user) { %>
+                    <a href="/blog/add-new" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> New Post
+                    </a>
+                    <a href="/user/profile" class="btn btn-outline-primary ms-2">
+                        <i class="bi bi-person"></i> Profile
+                    </a>
+                <% } else { %>
+                    <a href="/user/signin" class="btn btn-primary">
+                        <i class="bi bi-box-arrow-in-right"></i> Start Writing
+                    </a>
+                <% } %>
+            </div>
+        </section>
+
+        <% if (blogs && blogs.length > 0) { %>
+            <div class="row g-4">
+                <% blogs.forEach(blog => { 
+                    const canManage = locals.user && String(blog.createdBy?._id || blog.createdBy) === String(locals.user._id);
+                %>
+                    <div class="col-md-6 col-lg-4">
+                        <article class="card card-blog">
+                            <img src="<%= blog.coverImageURL || '/images/default.png' %>" class="card-img-top" alt="<%= blog.title %>">
+                            <div class="card-body d-flex flex-column p-4">
+                                <div class="d-flex justify-content-between gap-3 mb-2">
+                                    <small class="muted-copy">
+                                        <i class="bi bi-calendar3"></i>
+                                        <%= new Date(blog.createdAt).toLocaleDateString() %>
+                                    </small>
+                                    <% if (blog.createdBy && blog.createdBy.fullName) { %>
+                                        <small class="muted-copy"><%= blog.createdBy.fullName %></small>
+                                    <% } %>
+                                </div>
+                                <h2 class="card-title h5 mb-2"><%= blog.title %></h2>
+                                <p class="card-text muted-copy">
+                                    <%= blog.body ? blog.body.substring(0, 120) + (blog.body.length > 120 ? '...' : '') : 'No preview available' %>
+                                </p>
+                                <div class="mt-auto d-flex flex-wrap gap-2">
+                                    <a href="/blog/<%= blog._id %>" class="btn btn-primary btn-sm">
+                                        Read <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                    <% if (canManage) { %>
+                                        <div class="owner-actions d-flex flex-wrap gap-2 w-100 mt-2">
+                                            <span class="small fw-bold text-success w-100">
+                                                <i class="bi bi-shield-check"></i> Your post controls
+                                            </span>
+                                            <a href="/blog/<%= blog._id %>/edit" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i> Edit
+                                            </a>
+                                            <form action="/blog/<%= blog._id %>/delete" method="post" onsubmit="return confirm('Delete this post permanently?');">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                    <i class="bi bi-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <section class="soft-panel text-center p-5">
+                <i class="bi bi-journal-text display-4 muted-copy"></i>
+                <h2 class="section-title h4 mt-3">No posts yet</h2>
+                <p class="muted-copy">Create the first post and it will appear here.</p>
+                <% if (locals.user) { %>
+                    <a href="/blog/add-new" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create Post</a>
+                <% } else { %>
+                    <a href="/user/signin" class="btn btn-primary"><i class="bi bi-box-arrow-in-right"></i> Sign In</a>
+                <% } %>
+            </section>
+        <% } %>
+    </main>
+
+    <%- include('./partials/scripts') %>
+</body>
+</html>

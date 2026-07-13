@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <i class="bi bi-journal-text"></i> Blogify
+    </a>
+    
+    <!-- ===== TOGGLER (Mobile) ===== -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- ===== NAV LINKS ===== -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">
+            <i class="bi bi-house"></i> Home
+          </a>
+        </li>
+        
+        <!-- ===== LOGGED IN USER ===== -->
+        <% if (locals.user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/blog/add-new">
+              <i class="bi bi-plus-circle"></i> Add Blog
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" 
+               href="#" role="button" data-bs-toggle="dropdown">
+              <img src="<%= user.profileImageURL || '/images/default.png' %>" 
+                   alt="Profile" 
+                   class="profile-avatar">
+              <span><%= user.fullName || user.email %></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="/user/profile">
+                  <i class="bi bi-person"></i> My Profile
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item text-danger" href="/user/logout">
+                  <i class="bi bi-box-arrow-right"></i> Log Out
+                </a>
+              </li>
+            </ul>
+          </li>
+         
+        <!-- ===== GUEST USER ===== -->
+        <% } else { %>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link" href="/user/signup">
+              <i class="bi bi-person-plus"></i> Sign Up
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/signin">
+              <i class="bi bi-box-arrow-in-right"></i> Sign In
+            </a>
+          </li>
+        <% } %>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== ERROR ALERT ===== -->
+<% if (locals.error) { %>
+  <div class="container mt-3">
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      <%= locals.error %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  </div>
+<% } %>
+
+<!-- ===== SUCCESS ALERT ===== -->
+<% if (locals.success) { %>
+  <div class="container mt-3">
+    <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+      <i class="bi bi-check-circle-fill me-2"></i>
+      <%= locals.success %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  </div>
+<% } %>

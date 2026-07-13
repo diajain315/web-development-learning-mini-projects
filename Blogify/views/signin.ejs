@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>Sign In - Blogify</title>
+</head>
+<body>
+    <%- include("partials/nav") %>
+    
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7 col-11">
+                <!-- ===== HEADER ===== -->
+                <div class="text-center mb-4">
+                    <i class="bi bi-box-arrow-in-right display-1 text-primary"></i>
+                    <h1 class="display-6 fw-bold mt-2">Welcome Back!</h1>
+                    <p class="text-muted">Sign in to continue to Blogify</p>
+                </div>
+                
+                <!-- ===== FORM CARD ===== -->
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-body p-4 p-lg-5">
+                        <form action="/user/signin" method="POST">
+                            
+                            <!-- ===== ERROR ALERT ===== -->
+                            <% if (locals.error) { %>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                    <%= error %>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            <% } %>
+                            
+                            <!-- ===== SUCCESS ALERT ===== -->
+                            <% if (locals.success) { %>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="bi bi-check-circle-fill me-2"></i>
+                                    <%= success %>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            <% } %>
+                            
+                            <!-- ===== EMAIL ===== -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-semibold">
+                                    <i class="bi bi-envelope"></i> Email Address
+                                </label>
+                                <input type="email" 
+                                       name="email" 
+                                       class="form-control" 
+                                       id="email" 
+                                       placeholder="Enter your email"
+                                       required>
+                                <div class="form-text text-muted small">
+                                    We'll never share your email with anyone else.
+                                </div>
+                            </div>
+                            
+                            <!-- ===== PASSWORD ===== -->
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-semibold">
+                                    <i class="bi bi-lock"></i> Password
+                                </label>
+                                <input type="password" 
+                                       name="password" 
+                                       class="form-control" 
+                                       id="password" 
+                                       placeholder="Enter your password"
+                                       required>
+                            </div>
+                            
+                            <!-- ===== SUBMIT ===== -->
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-box-arrow-in-right"></i> Sign In
+                                </button>
+                            </div>
+                            
+                            <!-- ===== SIGN UP LINK ===== -->
+                            <div class="text-center mt-3">
+                                <p class="text-muted small">
+                                    Don't have an account? 
+                                    <a href="/user/signup" class="fw-bold text-decoration-none">
+                                        Sign Up
+                                    </a>
+                                </p>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- ===== FOOTER ===== -->
+                <p class="text-center text-muted small mt-3">
+                    <i class="bi bi-shield-check"></i> Your data is secure
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('./partials/scripts') %>
+</body>
+</html>
